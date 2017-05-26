@@ -1,9 +1,15 @@
 package com.example.yangc9915.googlemaps;
 
+import android.*;
+import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -29,20 +35,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
-        /*
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
-        */
     }
 
 
@@ -60,22 +52,49 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
 
-        /*
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        */
-
         //Add a marker in birth place and move the camera
         LatLng boise = new LatLng(43, -116);
         mMap.addMarker(new MarkerOptions().position(boise).title("born here"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(boise));
+/*
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            Log.d("GoogleMaps", "Failed Permission check 1");
+            Log.d("GoogleMaps", Integer.toString(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)));
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 2);
+        }
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.d("GoogleMaps", "Failed Permission check 2");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
+        }
+
+        mMap.setMyLocationEnabled(true);
+
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        String provider = locationManager.getBestProvider(criteria, true);
+        Location myLocation = locationManager.getLastKnownLocation(provider);
+
+        double latitude = myLocation.getLatitude();
+        double longitude = myLocation.getLongitude();
+
+        LatLng current = new LatLng(latitude, longitude);
+
+        mMap.addMarker(new MarkerOptions().position(current).title("current location"));
 
 
     }
 
+    public void toggleView(GoogleMap googleMap){
+        int mapType = mMap.getMapType();
 
+        if (mapType == googleMap.MAP_TYPE_NORMAL){
+            googleMap.setMapType(googleMap.MAP_TYPE_HYBRID);
+        }
+        else if(mapType == googleMap.MAP_TYPE_HYBRID){
+            googleMap.setMapType(googleMap.MAP_TYPE_NORMAL);
+        }
+    }
 
-
+*/
+    }
 }
