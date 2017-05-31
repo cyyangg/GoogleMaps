@@ -14,13 +14,14 @@
             android:layout_height="wrap_content"
             android:text="VIEW"
             android:id="@+id/button_toggle"
-            android:onClick="toggleView" />
+            android:onClick="changeView" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TRACKER"
-            android:id="@+id/button_track" />
+            android:id="@+id/button_track"
+            android:onClick="getLocation" />
     </LinearLayout>
 
 
