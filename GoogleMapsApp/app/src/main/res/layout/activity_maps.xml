@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:text="TRACKER"
             android:id="@+id/button_track"
-            android:onClick="getLocation" />
+            android:onClick="trackerToggle"
+            android:nestedScrollingEnabled="true" />
     </LinearLayout>
 
 
